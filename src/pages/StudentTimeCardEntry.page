@@ -1,0 +1,55 @@
+<apex:page showHeader="false" sidebar="false"
+controller="TimeCardStudentController">
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
+<apex:includeScript value="{!URLFOR($Resource.jQueryMaskedInput, '/jquery.maskedinput.min.js')}"  />
+
+<style>textarea {width: 33%;}</style>
+<!-- Header -->
+    <apex:image value="{!$Resource.CristoReyLogo}"/>
+    <p/>
+    
+<!-- Body -->
+    <!-- Display error messages -->
+    <apex:pagemessages />
+    <p/>
+    <apex:form id="timeCardForm">
+        <apex:pageBlock title="Welcome, {!timecard.Student__r.Name}!">
+            
+            <apex:pageBlockButtons rendered="{!canEdit}"> 
+                <apex:commandButton action="{!save}"
+                value="Submit Time Card"/>
+            </apex:pageBlockButtons>
+            <apex:outputLabel value="{!statusMessage}"/><p/><p/>
+            <apex:outputPanel rendered="{!canEdit}">
+            Your cell phone number:
+            <br/><apex:inputField id="phone" value="{!timecard.Student__r.Student_Cell_Phone__c}"/><p/>
+            <p/>
+            <apex:pageBlock title="Time Worked">
+                Start Time (HH:MM AM) with a space between the AM (or PM) and without the parenthesis:
+                <br/><apex:inputField value="{!timecard.Start_Time__c}" required="true" id="startTime"/><p/>
+                Lunch Out (HH:MM AM) with a space between the AM (or PM) and without the parenthesis:
+                <br/><apex:inputField value="{!timecard.Lunch_Out__c}" required="true" id="lunchOut"/><p/>
+                Lunch In (HH:MM AM) with a space between the AM (or PM) and without the parenthesis:
+                <br/><apex:inputField value="{!timecard.Lunch_In__c}" required="true" id="lunchIn"/><p/>
+                End Time (HH:MM AM) with a space between the AM (or PM) and without the parenthesis:
+                <br/><apex:inputField value="{!timecard.End_Time__c}" required="true" id="endTime"/><p/>
+            </apex:pageBlock>
+            <apex:pageBLock title="Work Information">
+                Sponsor Company Name:
+                <br/><apex:outputLabel value="{!timeCard.Supervisor__r.Account.Name}"/><p/>
+                Supervisors Name:
+                <br/><apex:inputField value="{!timeCard.Supervisor__r.Name}"/><p/>
+                Please enter your activities for the day, such as filing, scanning, answering the phone, attended meetings, etc.:
+                <br/><apex:inputField value="{!timeCard.Student_Description__c}" required="true"/><p/>            
+            </apex:pageBlock>
+            </apex:outputPanel>  
+        </apex:pageBlock>
+    </apex:form>
+    
+    <script type="text/javascript">
+    jQuery(function($){
+        $.mask.definitions['~']='[+-]';
+        $("#phone").mask("999-999-9999");
+    });
+    </script>
+</apex:page>

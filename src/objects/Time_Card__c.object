@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Time Card used to track a student&apos;s daily hours and performance at their sponsor.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Contact_Me__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Please check if you would like a member of CWSP to contact you.</description>
+        <externalId>false</externalId>
+        <label>Contact Me</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contact_Submitted_Date__c</fullName>
+        <description>The Date/Time that the student&apos;s contact submitted their time card</description>
+        <externalId>false</externalId>
+        <label>Contact Submitted Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Contact_Submitted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checked if the sponsor has submitted this time card.</description>
+        <externalId>false</externalId>
+        <label>Contact Submitted</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contact_URL__c</fullName>
+        <externalId>false</externalId>
+        <formula>&apos;http://cristorey.force.com/apex/SupervisorTimeCardEntry?c=&apos;+URL_Encoded_Hash__c</formula>
+        <label>Contact URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date__c</fullName>
+        <defaultValue>Today()</defaultValue>
+        <externalId>false</externalId>
+        <label>Date</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>End_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>End Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Hash__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <label>Hash</label>
+        <length>32</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Hours_Worked__c</fullName>
+        <externalId>false</externalId>
+        <formula>Total_Hours__c -  Lunch_Time__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hours Worked</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lunch_In__c</fullName>
+        <externalId>false</externalId>
+        <label>Lunch In</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Lunch_Out__c</fullName>
+        <externalId>false</externalId>
+        <label>Lunch Out</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Lunch_Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF ( ((Lunch_In__c - Lunch_Out__c )) &gt; 0,
+24 * ( ((Lunch_In__c - Lunch_Out__c)) )
+, 0)</formula>
+        <label>Lunch Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Student_Description__c</fullName>
+        <description>Please write a brief description about your activities for the day.</description>
+        <externalId>false</externalId>
+        <label>Student Description</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Student_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Student_Submitted_Date__c</fullName>
+        <description>The Date/Time that the student submitted their time card</description>
+        <externalId>false</externalId>
+        <label>Student Submitted Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Student_Submitted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checked if the student has submitted this time card.</description>
+        <externalId>false</externalId>
+        <label>Student Submitted</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Student_URL__c</fullName>
+        <externalId>false</externalId>
+        <formula>&apos;http://cristorey.force.com/apex/StudentTimeCardEntry?s=&apos; + URL_Encoded_Hash__c</formula>
+        <label>Student URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Student__c</fullName>
+        <externalId>false</externalId>
+        <label>Student</label>
+        <referenceTo>Student__c</referenceTo>
+        <relationshipLabel>Time Cards</relationshipLabel>
+        <relationshipName>Time_Cards</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Supervisor_Comments__c</fullName>
+        <description>Please comment the student’s work performance. (Please contact the CWSP office if necessary.)
+
+Important Numbers: Mr. Dan Walsh 713-725-4093 Mrs. Brandice Pierre 713-724-7903</description>
+        <externalId>false</externalId>
+        <label>Supervisor Comments</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Supervisor__c</fullName>
+        <externalId>false</externalId>
+        <label>Supervisor</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Time Cards</relationshipLabel>
+        <relationshipName>Time_Cards</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Total_Hours__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF ( ((End_Time__c - Start_Time__c )) &gt; 0,
+24 * ( ((End_Time__c - Start_Time__c )) )
+, 0)</formula>
+        <label>Total Hours</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>URL_Encoded_Hash__c</fullName>
+        <description>Removes special characters from the hash values</description>
+        <externalId>false</externalId>
+        <formula>SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Hash__c, &apos;+&apos;, &apos;%2B&apos;), &apos;=&apos;, &apos;%3D&apos;), &apos;/&apos;, &apos;%2F&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>URL Encoded Hash</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Time Card</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Student__c</columns>
+        <columns>Date__c</columns>
+        <columns>Supervisor__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>{YYYY}{MM}{DD}-{0000}</displayFormat>
+        <label>Time Card Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Time Cards</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Student__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Supervisor__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Test_Val_Rule_Sponsoe</fullName>
+        <active>true</active>
+        <description>Tests to see whether or not a validation rule can be displayed correctly on the sponsor&apos;s view of the time card.</description>
+        <errorConditionFormula>Supervisor_Comments__c == &apos;Sean&apos;</errorConditionFormula>
+        <errorMessage>Your comment says &quot;Sean&quot;. Since Sean is awesome, the corresponding validation rule works.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Time_Chronology</fullName>
+        <active>true</active>
+        <description>Makes sure the time card&apos;s start times are before the end times and that the lunch hour is also within the time period.</description>
+        <errorConditionFormula>(Start_Time__c  &gt;  End_Time__c) || (Lunch_Out__c &gt;  Lunch_In__c) || (Start_Time__c  &gt;  Lunch_Out__c) || (Lunch_In__c &gt; End_Time__c)</errorConditionFormula>
+        <errorMessage>Start/Out times cannot be before End/In times and the lunch hour must fall within the start and end time.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Time_Date_Matches</fullName>
+        <active>true</active>
+        <description>Makes sure all the time entries use the same date as the time cards date.</description>
+        <errorConditionFormula>DATEVALUE(Start_Time__c) != Date__c ||
+DATEVALUE(Lunch_Out__c) != Date__c ||
+DATEVALUE(Lunch_In__c) != Date__c ||
+DATEVALUE(End_Time__c) != Date__c</errorConditionFormula>
+        <errorMessage>All date time values must occur on the same date as the time sheets date value.</errorMessage>
+    </validationRules>
+</CustomObject>

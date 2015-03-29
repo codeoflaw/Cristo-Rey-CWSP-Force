@@ -1,0 +1,33 @@
+<apex:page showHeader="false" sidebar="false"
+controller="TimeCardSponsorController">
+<style>textarea { width: 33%; }</style>
+<!-- Header -->
+    <apex:image value="{!$Resource.CristoReyLogo}"/>
+    <p/>
+<!-- Body -->
+    <!-- Display error messages -->
+    <apex:pagemessages />
+    <p/>
+    <apex:form id="timeCardForm">
+        <apex:pageBlock title="Welcome, {!supervisorName}">
+            <apex:outputLabel value="{!statusmessage}" />
+            <p/>
+            <apex:pageBlock title="Student Time Card" rendered="{!canEdit}">
+                <apex:outputLabel value="Start Time: {!timecard.Start_Time__c}"/><p/>
+                <apex:outputLabel value="Lunch Out: {!timecard.Lunch_Out__c}"/><p/>
+                <apex:outputLabel value="Lunch In: {!timecard.Lunch_In__c}"/><p/>
+                <apex:outputLabel value="End Time: {!timecard.End_Time__c}"/><p/>
+                Student's description of activities for today:
+                <br/><apex:outputLabel value="{!timeCard.Student_Description__c}"/><p/>
+            </apex:pageBlock>
+            <apex:pageBlock title="Supervisor Comments and Confirmation" rendered="{!canEdit}">
+                <!--<apex:form id="timeCardForm">-->
+                    Please write any comments you'd like to add regarding the student's performance today:<br/>
+                    <apex:inputField value="{!timeCard.Supervisor_Comments__c}"/><p/>
+                    Please Contact Me: <apex:inputCheckbox value="{!timecard.Contact_Me__c}"/><br/>
+                    <apex:commandButton action="{!save}" value="Confirm Time Card"/>
+               <!--</apex:form>-->
+            </apex:pageBlock>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

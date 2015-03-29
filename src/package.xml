@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>GenerateHashTestClass</members>
+        <members>TimeCardCreatorController</members>
+        <members>TimeCardCreatorControllerTest</members>
+        <members>TimeCardSponsorController</members>
+        <members>TimeCardSponsorControllerTest</members>
+        <members>TimeCardStudentController</members>
+        <members>TimeCardStudentControllerTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>StudentTimeCardEntry</members>
+        <members>SupervisorTimeCardEntry</members>
+        <members>TimeCardCreator</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>Student__c</members>
+        <members>Time_Card__c</members>
+        <members>Transportation__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>CristoReyLogo</members>
+        <name>StaticResource</name>
+    </types>
+    <version>31.0</version>
+</Package>

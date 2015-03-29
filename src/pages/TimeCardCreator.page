@@ -1,0 +1,84 @@
+<apex:page showHeader="false" sidebar="false"
+controller="TimeCardCreatorController">
+<!-- Header -->
+    <apex:image value="{!$Resource.CristoReyLogo}"/>
+    <p/>
+    
+<!-- Body -->
+    <p/>
+    <apex:outputPanel id="all">
+        <apex:form id="timeCardForm">
+            <apex:pageBlock title="Step 1: Get the list of students for {!dayOfWeek}">
+                <apex:outputtext value="Choose the day of the week to get students from" rendered="{!isFriday}"/>
+                <apex:SelectList label="daySelectList" value="{!selectedDay}" rendered="{!isFriday}" size="1">
+                    <apex:selectOptions value="{!dayOptions}"/>
+                    <apex:actionSupport event="onchange" action="{!setSelectedDay}"/>
+                </apex:selectList>
+                <apex:commandButton action="{!findStudents}" value="Get Today's Students" rendered="{!IF(isFriday, false, true)}" />
+            </apex:pageBlock>
+            <br/><h1><apex:outputLabel value="     {!createMessage}" style="color:#FDBB30; text-decoration:underline;"/></h1><p/>
+            <apex:pageBlock title="Step 2: Select the students that are working today" rendered="{!hasFoundStudents}">
+                <h1><apex:outputLabel value="{!statusMessage}"/></h1><p></p>
+                <h1><apex:inputCheckbox onclick="checkAll(this,'workingCheckbox')" selected="false"/>Select All available Students</h1><p></p>
+                <!-- Show students who do not have time cards created for them -->
+                <br/><apex:dataTable value="{!students}" var="pstudent" rowClasses="odd,even" id="studentList" rendered="{!IF(students.size>0, true, false)}">
+                    <apex:column headerValue="Create" style="width:250px">
+                        <apex:inputCheckbox id="workingCheckbox" value="{!pstudent.IsWorking}" selected="false"/>
+                    </apex:column>
+                    <apex:column headerValue="Student Name" style="width:250px">
+                        <apex:outputLabel value="{!pstudent.Name}"/>
+                    </apex:column>
+                    <apex:column headerValue="Sponsor Name" style="width:250px">
+                        <apex:outputLabel value="{!pstudent.SponsorName}"/>
+                    </apex:column>
+                    <apex:column headerValue="Supervisor Name" style="width:250px">
+                        <apex:outputLabel value="{!pstudent.ContactName}"/>
+                    </apex:column>
+                </apex:datatable>
+                
+                <!-- Show students who already have time cards created for them -->
+                <br/><h1>Students who already have time cards for today</h1><br/>
+                <apex:dataTable value="{!studentsWithCards}" 
+                    var="pstudent" 
+                    rowClasses="odd,even" 
+                    id="studentsWithCardsList"
+                    rendered="{!IF(studentsWithCards.size>0, true, false)}">
+                    <apex:column style="width:100px"/>
+                    <apex:column headerValue="Student Name" style="width:250px">
+                        <apex:outputLabel value="{!pstudent.Name}"/>
+                    </apex:column>
+                    <apex:column headerValue="Sponsor Name" style="width:250px">
+                        <apex:outputLabel value="{!pstudent.SponsorName}"/>
+                    </apex:column>
+                    <apex:column headerValue="Supervisor Name" style="width:250px">
+                        <apex:outputLabel value="{!pstudent.ContactName}"/>
+                    </apex:column>
+                </apex:datatable>
+            </apex:pageBlock>
+            <br/><p/>
+            <apex:pageBlock title="Step 3: Create time cards for the selected students" rendered="{!IF(students.size>0, true, false)}">
+            <br/><h1><apex:outputLabel value="     {!createMessage}" style="color:#FDBB30; text-decoration:underline;"/></h1><p/>
+                <apex:commandButton action="{!createTimeCards}" value="Create Time Cards"/>
+            </apex:pageBlock>
+        </apex:form>
+    </apex:outputPanel>
+    
+    <script type="text/javascript">
+    function checkAll(cb,cbid)
+        {
+            var inputElem = document.getElementsByTagName("input");                     
+            for(var i=0; i<inputElem.length; i++)
+            {             
+                 if(inputElem[i].id.indexOf(cbid)!=-1){                                        
+                    inputElem[i].checked = cb.checked;
+                }
+            }
+        }
+    </script>
+    
+    <script>
+    function showResult(result) {
+       alert(result);
+    }
+</script>
+</apex:page>
