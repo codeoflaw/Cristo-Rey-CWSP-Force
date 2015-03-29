@@ -41,3 +41,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.settings
+*.session
+*.apex_script
+config/.debug
+*.describe
+*.local_store
+config/.org_metadata
+*.sublime-project
+Cristo Rey Houston.sublime-workspace
+*.sublime-settings
